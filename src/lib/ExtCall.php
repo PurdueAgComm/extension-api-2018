@@ -9,6 +9,8 @@
  *
  */
 
+namespace SFP\PurdueAg;
+
 class ExtCall
 {
     private $ch; //curl handler
@@ -33,6 +35,7 @@ class ExtCall
         curl_setopt($this->ch, CURLOPT_POSTFIELDS, $param_string);
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
         $result = curl_exec($this->ch);
+        error_log($result, 0);
         curl_close($this->ch);
         return json_decode($result);
     }
@@ -73,11 +76,25 @@ class ExtCall
         return $this->post('Item.ashx', $params);
     }
 
-    public function getItemBlurbList($id)
+    //gets only 4 blurb list items, locked
+    public function getItemBlurbListShort($id)
     {
         $params = array(
             't' => 'b',
             'i' => $id
+        );
+        return $this->post('Item.ashx', $params);
+    }
+
+    public function getItemBlurbList($id, $size = 7, $count = 0)
+    {
+        $params = array(
+            't' => 'bp',
+            'i' => $id,
+            //'c' => cat/-1
+            //'s' => subcat/-1
+            'ps' => $size,
+            'pc' => $count
         );
         return $this->post('Item.ashx', $params);
     }
@@ -148,5 +165,41 @@ class ExtCall
     public function getImageLink($id)
     {
         return $this->url.'File.ashx?t=i&i='.$id;
+    }
+
+    public function getEventList($id, $count = 5)
+    {
+        $params = array(
+            't' => 'eh',
+            'i' => $id,
+            'ps' => $count
+        );
+        return $this->post('event.ashx', $params);
+    }
+
+    public function getEventLabelDetails($id)
+    {
+        $params = array(
+            't' => 'el',
+            'i' => $id
+        );
+        return $this->post('event.ashx', $params);
+    }
+
+    public function getEventDetails($id)
+    {
+        $params = array(
+            't' => 'd',
+            'i' => $id
+        );
+        return $this->post('event.ashx', $params);
+    }
+
+    public function getLabelList()
+    {
+        $params = array(
+            't' => 'l'
+        );
+        return $this->post('label.ashx', $params);
     }
 }
