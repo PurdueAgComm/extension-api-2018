@@ -17,3 +17,11 @@ rsync -avz ./src/ jalder@dev.boilerpress.itap.purdue.edu:/var/www/data/root/wp.e
 `https://extension.purdue.edu/pages/default.aspx`
 
 `https://extension.purdue.edu/pages/article.aspx?intItemID=28648`
+
+# DCR API Notes
+
+## Undocumented API Calls
+
+The docs/ExtensionDCRWebService.docx is missing the following API Call Documentation.
+
+*

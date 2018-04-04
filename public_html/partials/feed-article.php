@@ -2,7 +2,9 @@
 /**
  * Feed item/article markup
  */
-?><?php if(isset($article->thumb)): ?>
+?>
+<?php foreach($articles as $article):?>
+<?php if(isset($article->thumb)): ?>
     <a href="article.aspx?intItemID=<?php echo $article->intItemID; ?>">
         <img src="<?php echo $article->thumb->url; ?>" alt="<?php echo $article->thumb->alt; ?>" />
     </a>
@@ -20,3 +22,4 @@
 <div>
     <a href="article.aspx?intItemID=<?php echo $article->intItemID; ?>">read more...</a>
 </div>
+<?php endforeach; ?>

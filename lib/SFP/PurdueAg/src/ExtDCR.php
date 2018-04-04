@@ -11,7 +11,7 @@
 
 namespace SFP\PurdueAg;
 
-//require libs
+//require API Calling Class
 require_once('ExtCall.php');
 
 use stdClass;
@@ -20,13 +20,14 @@ class ExtDCR
 {
     private $call;
     private $api = 'https://api.ag.purdue.edu/api/DepotWS/';
-    private $homeId;
+    private $homeId = 0;
     private $countyUrl;
 
     public function __construct($county_url)
     {
-        $this->countyUrl = $county_url; //todo: refactor the county url to home id work to cut down on repeated calls
         $this->call = new ExtCall($this->api);
+        $this->countyUrl = $county_url;
+        $this->homeId = $this->_getHomeID($this->countyUrl);
     }
 
     public function getHeaderElements($county_url)
@@ -43,12 +44,9 @@ class ExtDCR
         return $header;
     }
 
-    public function getMenu($county_url)
+    public function getMenu()
     {
-        $id = $this->_getHomeID($county_url);
-
-        $menu = $this->call->getMenu($id);
-
+        $menu = $this->call->getMenu($this->homeId);
         return $menu;
     }
 
@@ -104,50 +102,26 @@ class ExtDCR
         return $result;
     }
 
-    public function getStatePage($state_url)
+    public function getPageBanner()
     {
-        $id = $this->_getHomeID($state_url);
-        return $id;
+        return $this->call->getStaticItemDetails($this->_getHomeID());
     }
 
-    public function getCountyPage($county_url)
+    private function _getHomeID($url = false)
     {
-        //get the home id for the current landing page
-        $id = $this->_getHomeID($county_url);
-
-        //API call not defined in docs for this
-        $cta = $this->call->getStaticItemDetails($id);
-
-        //get article list from newsfeed
-        $articles = $this->_getNewsFeed($id);
-
-        //get the events list, cap at 5
-        $events = $this->_getEventsFeed($id, 5);
-
-        //gather up page content
-        $page_content = array(
-            'articles' => $articles,
-            'events' => $events,
-            'cta' => $cta
-        );
-        return $page_content;
-    }
-
-    private function _getHomeID($url)
-    {
-        if(isset($this->homeId)){
-            return $this->homeId;
+        if($url === false){
+            $url = $this->countyUrl;
         }
-        else{
+        if($this->homeId === 0 && $url !== false){
             $result = $this->call->getHomeID($url);
-            $id = $result->intHomeID;
-            return $id;
+            $this->homeId = $result->intHomeID;
         }
+        return $this->homeId;
     }
 
-    private function _getNewsFeed($id)
+    public function getArticleList($size = 7, $count = 0)
     {
-        $articles = $this->call->getItemBlurbList($id);
+        $articles = $this->call->getItemBlurbList($this->_getHomeID(), $size, $count);
 
         //build article list additional details/assets
         foreach($articles as &$article){
@@ -164,9 +138,9 @@ class ExtDCR
         return $articles;
     }
 
-    private function _getEventsFeed($id, $count = 5)
+    public function getEventList($size = 5, $count = 0)
     {
-        $events = $this->call->getEventList($id, $count);
+        $events = $this->call->getEventList($this->_getHomeID(), $size, $count);
         return $events;
     }
 }

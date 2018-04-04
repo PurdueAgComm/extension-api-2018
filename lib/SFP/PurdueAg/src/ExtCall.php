@@ -91,8 +91,6 @@ class ExtCall
         $params = array(
             't' => 'bp',
             'i' => $id,
-            //'c' => cat/-1
-            //'s' => subcat/-1
             'ps' => $size,
             'pc' => $count
         );
@@ -167,12 +165,14 @@ class ExtCall
         return $this->url.'File.ashx?t=i&i='.$id;
     }
 
-    public function getEventList($id, $count = 5)
+    public function getEventList($id, $size = 5, $count = 0)
     {
+        //todo: the eh call may be dedicated to the homepage only and locked at 5 items, refactor this
         $params = array(
             't' => 'eh',
             'i' => $id,
-            'ps' => $count
+            'ps' => $size,
+            'pc' => $count
         );
         return $this->post('event.ashx', $params);
     }
