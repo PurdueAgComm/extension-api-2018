@@ -30,6 +30,7 @@ class ExtDCR
         $this->homeId = $this->_getHomeID($this->countyUrl);
     }
 
+    //todo: deprecate this, move to wrapper functions
     public function getHeaderElements($county_url)
     {
         //get the home id for the current landing page
@@ -60,6 +61,7 @@ class ExtDCR
 
     }
 
+    //todo: move this to the ExtCall Class
     public function getArticlePage($article_id)
     {
         $params = array(
@@ -91,6 +93,7 @@ class ExtDCR
 
     }
 
+    //todo: move this to the ExtCall Class
     public function getSubCategoryPage()
     {
         //retrieve item blurb list

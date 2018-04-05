@@ -1,18 +1,7 @@
-# SSH Notes
-
-```
-ssh jalder@dev.boilerpress.itap.purdue.edu
-```
-
-```
-cd /var/www/data/root/wp.extension.purdue.edu/
-```
-
-```
-rsync -avz ./src/ jalder@dev.boilerpress.itap.purdue.edu:/var/www/data/root/wp.extension.purdue.edu/themes/child_theme/
-```
 
 # Web Page Notes
+
+## Current Site for Reference
 
 `https://extension.purdue.edu/pages/default.aspx`
 
@@ -24,4 +13,4 @@ rsync -avz ./src/ jalder@dev.boilerpress.itap.purdue.edu:/var/www/data/root/wp.e
 
 The docs/ExtensionDCRWebService.docx is missing the following API Call Documentation.
 
-*
+* getItemBlurbList in ExtCall isn't present in the docx file.

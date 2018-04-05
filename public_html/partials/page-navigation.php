@@ -2,13 +2,10 @@
 /**
  * local variable $navigation must be set by the function including this partial
  *
- * home and about links are implied to be always present.  the rest are dynamic.
- *
  * we are using the listMenuCategories intCategoryID and strCategoryText instead of the strCategoryURL since those are hardset to the current application.
  *
  * we are honoring the sub-category list menu links node URL as-is.
  *
- * SFP Note: This is merely a suggestion on how to go about the menu, rewrite however you prefer to build megamenu navigation.
  */
 
 $root = $navigation->currentHome->strPublicURLRoot;

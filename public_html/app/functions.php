@@ -15,7 +15,7 @@ function bootstrap()
     //require API Interaction class
     require_once('../../lib/SFP/PurdueAg/src/ExtDCR.php');
 
-    //get the global homepath (global vars are not ideal, but this is to make templating more friendly
+    //get the global homepath from the view and create the ext global var
     global $homepath, $ext;
 
     if($homepath == ''){
