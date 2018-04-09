@@ -4,7 +4,7 @@
 
 The API implementation lives in the lib directory.  I've namespaced it so porting to a composer.json autoload should work when using PSR-4.
 
-In public_html is a set of example pages/templates for usage.  The public_html/app/functions.php is a wrapper class for the lib to bring the API results into the templates.
+In public_html is a set of example pages/templates for usage.  The public_html/app/functions.php is a set of wrapper functions for the lib to bring the API results into the templates.
 
 ## Usage
 

@@ -112,14 +112,24 @@ class ExtDCR
 
     private function _getHomeID($url = false)
     {
-        if($url === false){
+        if ($url === false) {
             $url = $this->countyUrl;
         }
-        if($this->homeId === 0 && $url !== false){
+        if ($this->homeId === 0 && $url !== false) {
             $result = $this->call->getHomeID($url);
             $this->homeId = $result->intHomeID;
         }
         return $this->homeId;
+    }
+
+    public static function validateHomepath($url)
+    {
+        $call = new ExtCall('https://api.ag.purdue.edu/api/DepotWS/');
+        $ext = $call->getHomeID($url);
+        if(isset($ext->intHomeID)){
+            return true;
+        }
+        return false;
     }
 
     public function getArticleList($size = 7, $count = 0)

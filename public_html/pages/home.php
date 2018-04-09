@@ -1,17 +1,3 @@
-<?php
-/** Begin Bootstrap */
-
-//require the application functions file
-require_once('../app/functions.php');
-
-//set the homepath URL variable
-$homepath = 'extension.purdue.edu/';
-
-//kick off the bootstrap
-bootstrap();
-
-/** End Bootstrap */
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

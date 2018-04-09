@@ -10,6 +10,22 @@
  *
  */
 
+function get_homepath()
+{
+    require_once('../../lib/SFP/PurdueAg/src/ExtDCR.php');
+    $path = trim($_SERVER['REQUEST_URI'],'/');
+    $path_parts = explode('/',$path);
+    $is_county = '';
+    if(isset($path_parts[0])){
+        $is_county = $path_parts[0];
+    }
+    $ext = SFP\PurdueAg\ExtDCR::validateHomepath('extension.purdue.edu/'.$is_county);
+    if($ext){
+        return 'extension.purdue.edu/'.$is_county;
+    }
+    return 'extension.purdue.edu/';
+}
+
 function bootstrap()
 {
     //require API Interaction class

@@ -1,0 +1,13 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_URI} ^/tippecanoe/(.*)$ [NC,OR]
+RewriteCond %{REQUEST_URI} ^/tippecanoe$ [NC]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ /app/index.php [L,NC]
+
+RewriteCond %{REQUEST_URI} ^/benton/(.*)$ [NC,OR]
+RewriteCond %{REQUEST_URI} ^/benton [NC]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ /app/index.php [L,NC]
