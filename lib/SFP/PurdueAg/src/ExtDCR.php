@@ -88,9 +88,20 @@ class ExtDCR
 
     }
 
-    public function getCategoryPage()
+    //todo: move this to the ExtCall Class
+    public function getCategoryPage($cat_id, $page_size = 7, $page_count = 0)
     {
-
+        //retrieve item blurb list
+        $params = array(
+            't' => 'bp',
+            'i' => $this->_getHomeID(),
+            'ps' => $page_size,
+            'pc' => $page_count,
+            'c' => $cat_id,
+            's' => -1
+        );
+        $result = $this->call->post('Item.ashx', $params);
+        return $result;
     }
 
     //todo: move this to the ExtCall Class

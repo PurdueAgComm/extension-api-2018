@@ -12,10 +12,26 @@
 
 function get_homepath()
 {
+    $known_routes = [
+        'category',
+        'subcategory',
+        'events',
+        'event',
+        'label',
+        'about',
+        'article',
+        'profile'
+    ];
     require_once('../../lib/SFP/PurdueAg/src/ExtDCR.php');
     $path = trim($_SERVER['REQUEST_URI'],'/');
     $path_parts = explode('/',$path);
     $is_county = '';
+    foreach($known_routes as $route) {
+        if(strpos($path,$route) === 0){
+            //known reserved path is at /, this *must* be the main page, no need to contact the API
+            return 'extension.purdue.edu/';
+        }
+    }
     if(isset($path_parts[0])){
         $is_county = $path_parts[0];
     }
@@ -24,6 +40,27 @@ function get_homepath()
         return 'extension.purdue.edu/'.$is_county;
     }
     return 'extension.purdue.edu/';
+}
+
+function get_template()
+{
+    $known_routes = [
+        '/category',
+        '/subcategory',
+        '/events',
+        '/event',
+        '/label',
+        '/about',
+        '/article',
+        '/profile'
+    ];
+    foreach($known_routes as $route){
+        if(strpos($_SERVER['REQUEST_URI'],$route) !== false){
+            //known route is present in request uri
+            return trim($route, '/').'.php';
+        }
+    }
+    return 'home.php';
 }
 
 function bootstrap()
@@ -74,6 +111,13 @@ function get_article_list($pagesize = 7, $pagecount = 0)
 {
     global $ext;
     $articles = $ext->getArticleList($pagesize, $pagecount);
+    include('../partials/feed-article.php');
+}
+
+function get_category_list($cat_id, $page_size = 7, $page_count = 0)
+{
+    global $ext;
+    $articles = $ext->getCategoryPage($cat_id, $page_size, $page_count);
     include('../partials/feed-article.php');
 }
 

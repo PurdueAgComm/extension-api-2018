@@ -10,4 +10,7 @@ bootstrap();
 /** End Bootstrap */
 
 //get the template file
-include('../pages/home.php');
+$template = get_template();
+if(is_file('../pages/'.$template)){
+    include('../pages/'.$template);
+}

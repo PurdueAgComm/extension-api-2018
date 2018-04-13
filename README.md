@@ -19,6 +19,7 @@ In public_html is a set of example pages/templates for usage.  The public_html/a
 * label/{id} - Routes to a an article list page filtered by label (relative)
 * about - Routes to an about page (relative)
 * article/{id} - Routes to an article page (relative)
+* profile/{alias} - Routes to a profile page (relative)
 
 ## Direct API Usage
 
