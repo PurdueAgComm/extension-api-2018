@@ -6,7 +6,21 @@ The API implementation lives in the lib directory.  I've namespaced it so portin
 
 In public_html is a set of example pages/templates for usage.  The public_html/app/functions.php is a set of wrapper functions for the lib to bring the API results into the templates.
 
-## Usage
+## Framework Notes
+
+### Routes
+
+* / - Routes to the main intHomeID=1 presence (absolute)
+* /{county} - Routes to the home page for the county (absolute)
+* category/{id} - Routes to a category page (relative)
+* subcategory/{id} - Routes to a subcategory page (relative)
+* events - Routes to the all events page (relative)
+* event/{id} - Routes to a specific event page (relative)
+* label/{id} - Routes to a an article list page filtered by label (relative)
+* about - Routes to an about page (relative)
+* article/{id} - Routes to an article page (relative)
+
+## Direct API Usage
 
 Require the lib/SFP/PurdueAg/src/ExtDCR.php in your application.  The public_html/app/functions.php is a suggestion on how to go about usage, but you can certainly use the API library directly if you prefer.
 
