@@ -22,7 +22,7 @@ function get_homepath()
         'article',
         'profile'
     ];
-    require_once('../../lib/SFP/PurdueAg/src/ExtDCR.php');
+    require_once('../lib/SFP/PurdueAg/src/ExtDCR.php');
     $path = trim($_SERVER['REQUEST_URI'],'/');
     $path_parts = explode('/',$path);
     $is_county = '';
@@ -66,7 +66,7 @@ function get_template()
 function bootstrap()
 {
     //require API Interaction class
-    require_once('../../lib/SFP/PurdueAg/src/ExtDCR.php');
+    require_once('../lib/SFP/PurdueAg/src/ExtDCR.php');
 
     //get the global homepath from the view and create the ext global var
     global $homepath, $ext;
