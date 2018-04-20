@@ -34,6 +34,10 @@ function get_homepath()
     }
     if(isset($path_parts[0])){
         $is_county = $path_parts[0];
+        if(isset($path_parts[1]) && $path_parts[0] === 'extension'){
+            //this may be the dev server, get the next subdir
+            $is_county = $path_parts[1];
+        }
     }
     $ext = SFP\PurdueAg\ExtDCR::validateHomepath('extension.purdue.edu/'.$is_county);
     if($ext){
@@ -126,6 +130,13 @@ function get_event_list($pagesize = 5, $pagecount = 0)
     global $ext;
     $events = $ext->getEventList($pagesize, $pagecount);
     include('../partials/feed-event.php');
+}
+
+function get_article($article_id)
+{
+    global $ext;
+    $article = $ext->getArticlePage($article_id);
+    include('../partials/page-article.php');
 }
 
 function get_footer()

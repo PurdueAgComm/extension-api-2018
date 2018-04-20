@@ -65,7 +65,7 @@ class ExtDCR
     public function getArticlePage($article_id)
     {
         $params = array(
-            't' => 'e', //expanded article details
+            't' => 'd', //get item details
             'i' => $article_id,
         );
         $result = $this->call->post('Item.ashx', $params);
